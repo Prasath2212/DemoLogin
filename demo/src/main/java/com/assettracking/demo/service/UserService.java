@@ -1,22 +1,33 @@
 package com.assettracking.demo.service;
 
+import com.assettracking.demo.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UserService {
 
-    private static final Map<String, String> USERS = new HashMap<>();
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    static {
-        USERS.put("admin", "admin123");
-        USERS.put("user", "user123");
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
+	/*
+	 * public boolean validate(String username, String password) { return
+	 * userRepository.findByUsername(username) .map(user ->
+	 * passwordEncoder.matches(password, user.getPassword())) .orElse(false); //
+	 * Return false if user not found }
+	 */
+    
     public boolean validate(String username, String password) {
-        return USERS.containsKey(username)
-                && USERS.get(username).equals(password);
+        return userRepository.findByUsername(username)
+                .map(user -> {
+                    boolean match = passwordEncoder.matches(password, user.getPassword());
+                    System.out.println("DEBUG: Username=" + username + ", InputPass=" + password + ", DBHash=" + user.getPassword() + ", Match=" + match);
+                    return match;
+                })
+                .orElse(false);
     }
 }

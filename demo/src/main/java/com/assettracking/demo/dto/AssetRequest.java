@@ -1,43 +1,32 @@
 package com.assettracking.demo.dto;
 
-
 public class AssetRequest {
 
-    private String name;
-    private String category;
-    private String status;
-    private Boolean deleted;
+    private String assetName;
+    private String assetType;
+    private String serialNumber;
 
-    // ✅ Getters & Setters
-    public String getName() {
-        return name;
+    public String getAssetName() {
+        return assetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getAssetType() {
+        return assetType;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 }

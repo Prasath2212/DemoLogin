@@ -3,12 +3,14 @@ package com.assettracking.demo.controller;
 import com.assettracking.demo.dto.AssetRequest;
 import com.assettracking.demo.entity.AssetEntity;
 import com.assettracking.demo.service.AssetService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;  // Add this import
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/assets")
+@SecurityRequirement(name = "bearer-key")  // Requires Bearer token for all endpoints in this controller
 public class AssetController {
 
     private final AssetService assetService;

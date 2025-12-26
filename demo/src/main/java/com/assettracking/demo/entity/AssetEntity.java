@@ -1,23 +1,31 @@
 package com.assettracking.demo.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "assets")
 public class AssetEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String assetName;
     private String assetType;
     private String serialNumber;
-    private boolean deleted;
 
-    public AssetEntity() {
-    }
+    @Column(nullable = false)
+    private boolean deleted = false;
 
-    public AssetEntity(Long id, String assetName, String assetType, String serialNumber) {
-        this.id = id;
+    public AssetEntity() {}
+
+    public AssetEntity(String assetName, String assetType, String serialNumber) {
         this.assetName = assetName;
         this.assetType = assetType;
         this.serialNumber = serialNumber;
-        this.deleted = false;
     }
+
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
